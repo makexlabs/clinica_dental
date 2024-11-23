@@ -23,10 +23,35 @@ let diente = {
     height: 50,
 };
 
+// Variable para controlar si el usuario está tocando la pantalla
+let isTouching = false;
+
 // Evento para mover el diente con el cursor
 canvas.addEventListener('mousemove', (e) => {
     diente.x = e.clientX - diente.width / 2;
     diente.y = e.clientY - diente.height / 2;
+});
+
+// Eventos para manejo táctil
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // Prevenir comportamientos predeterminados, como el scroll
+    const touch = e.touches[0]; // Obtener la primera ubicación táctil
+    diente.x = touch.clientX - diente.width / 2;
+    diente.y = touch.clientY - diente.height / 2;
+    isTouching = true; // Indicar que el usuario está tocando la pantalla
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevenir comportamientos predeterminados
+    if (isTouching) {
+        const touch = e.touches[0];
+        diente.x = touch.clientX - diente.width / 2;
+        diente.y = touch.clientY - diente.height / 2;
+    }
+});
+
+canvas.addEventListener('touchend', () => {
+    isTouching = false; // Indicar que el usuario dejó de tocar la pantalla
 });
 
 // Función para generar enemigos (caries)
