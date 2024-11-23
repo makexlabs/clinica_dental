@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: clinica-dental
+    name: clinica_dental
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
