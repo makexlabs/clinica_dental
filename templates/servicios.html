@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Dentales</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <section class="services-section">
+        <div class="services-grid">
+            <button class="service-btn" data-service="consulta">
+                <span class="service-text">Consulta</span>
+            </button>
+            <button class="service-btn" data-service="resinas">
+                <span class="service-text">Resinas</span>
+            </button>
+            <button class="service-btn" data-service="limpieza">
+                <span class="service-text">Limpieza Dental</span>
+            </button>
+            <button class="service-btn" data-service="blanqueamiento">
+                <span class="service-text">Blanqueamiento</span>
+            </button>
+            <button class="service-btn" data-service="ortodoncia">
+                <span class="service-text">Ortodoncia</span>
+            </button>
+            <button class="service-btn" data-service="endodoncia">
+                <span class="service-text">Endodoncia</span>
+            </button>
+        </div>
+
+        <!-- Modal para mostrar la información -->
+        <div class="service-modal" id="serviceModal">
+            <div class="modal-content">
+                <button class="close-btn">&times;</button>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </section>
+    <script src="/static/js/services.js"></script>
+</body>
+</html>
