@@ -152,7 +152,7 @@ function gameLoop() {
     if (gameOver) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'red';
-        ctx.font = '48px Arial';
+        ctx.font = '40px Arial';
         ctx.fillText('¡Juego terminado!', canvas.width / 2 - 150, canvas.height / 2);
         ctx.fillText(`Puntaje final: ${score}`, canvas.width / 2 - 150, canvas.height / 2 + 50);
         return;

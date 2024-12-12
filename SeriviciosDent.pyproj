@@ -31,8 +31,10 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".env" />
     <Content Include=".gitignore" />
-    <Content Include="requeriments.txt" />
+    <Content Include="render.yaml" />
+    <Content Include="requirements.txt" />
     <Content Include="static\css\styles.css" />
     <Content Include="static\img\caries.png" />
     <Content Include="static\img\diente.png" />

@@ -3,6 +3,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #0a192f;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Estilos para el menú principal */
@@ -12,6 +16,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    width: 100%;
     padding: 2rem;
     text-align: center;
 }
@@ -26,10 +31,11 @@ body {
 .menu-buttons {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 1.5rem;
-    min-width: 250px;
-    max-width: 400px;
     width: 100%;
+    max-width: 400px;
 }
 
     .menu-buttons .btn {
@@ -43,7 +49,6 @@ body {
         font-size: 1.1rem;
         text-decoration: none;
         transition: all 0.3s ease;
-        display: inline-block;
         text-align: center;
     }
 
@@ -71,7 +76,6 @@ body {
             text-shadow: 0 0 5px #64ffda;
         }
 
-/* Estilos para la sección de servicios */
 .services-section {
     padding: 2rem;
 }
@@ -96,6 +100,7 @@ body {
     font-size: 1.1rem;
     transition: all 0.3s ease;
     overflow: hidden;
+    text-align: center;
 }
 
     .service-btn::before {
@@ -126,7 +131,6 @@ body {
     z-index: 1;
 }
 
-/* Modal styles */
 .service-modal {
     display: none;
     position: fixed;
@@ -176,7 +180,19 @@ body {
         transform: rotate(90deg);
     }
 
-/* Responsive design */
+.modal-details {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-detail-item {
+    margin-bottom: 1rem;
+    background: rgba(100, 255, 218, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
 @media (max-width: 768px) {
     .services-grid {
         grid-template-columns: 1fr;
@@ -184,12 +200,35 @@ body {
         padding: 1rem;
     }
 
-    .menu-buttons {
-        padding: 0 1rem;
+    .modal-content {
+        margin: 20px;
+        padding: 1.5rem;
     }
 
-    .main-menu h1 {
-        font-size: 2rem;
-        padding: 0 1rem;
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .menu-buttons {
+            padding: 0 1rem;
+        }
+
+        .main-menu h1 {
+            font-size: 2rem;
+            padding: 0 1rem;
+        }
+
+        .menu-buttons .btn {
+            font-size: 1rem;
+            padding: 1.2rem;
+        }
+
+        .modal-content {
+            margin: 20px;
+            padding: 1.5rem;
+        }
     }
-}
