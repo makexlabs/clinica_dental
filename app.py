@@ -18,15 +18,19 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 # Protección CSRF
 csrf = CSRFProtect(app)
 
-# Configurar Talisman (desactivado en desarrollo)
+# Configurar Talisman (desactivado en desarrollo, flexible en producción)
 if os.getenv('FLASK_ENV', 'development') == 'production':
     csp = {
         'default-src': "'self'",
         'img-src': "'self' data:",
-        'script-src': "'self'",
-        'style-src': "'self' 'unsafe-inline'",
+        'script-src': "'self' https://unpkg.com",
+        'style-src': "'self' 'unsafe-inline' https://unpkg.com",
+        'font-src': "'self' data:",  # Permitir fuentes embebidas
     }
     Talisman(app, content_security_policy=csp)
+else:
+    # En desarrollo, desactivar CSP para evitar bloqueos innecesarios
+    Talisman(app, content_security_policy=None)
 
 # Rutas
 @app.route('/')
@@ -40,6 +44,10 @@ def servicios():
 @app.route('/juego')
 def juego():
     return render_template('juego.html')
+
+@app.route('/promociones')
+def promociones():
+    return render_template('promociones.html')
 
 # Ejecutar la aplicación
 if __name__ == '__main__':

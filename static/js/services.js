@@ -2,40 +2,62 @@
 const serviciosData = {
     consulta: {
         titulo: "Consulta Dental",
-        descripcion: "Evaluación completa de tu salud bucal, incluyendo examen clínico, radiografías y plan de tratamiento personalizado.",
-        duracion: "30 minutos",
-        costo: "$50"
+        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento y Presupuesto.",
+        duracion: " 30min a 1h",
+        costo: "$300"
     },
     resinas: {
         titulo: "Resinas Dentales",
-        descripcion: "Restauraciones estéticas del color de tus dientes para reparar caries, fracturas o mejorar la apariencia de tus dientes.",
+        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Eliminación deCaries y Obturación con Resina",
         duracion: "1 hora",
-        costo: "$200"
+        costo: "$500 por Diente"
     },
     limpieza: {
         titulo: "Limpieza Dental Profesional",
-        descripcion: "Eliminación de placa bacteriana y sarro, pulido dental y aplicación de flúor para prevenir caries.",
-        duracion: "45 minutos",
-        costo: "$70"
+        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Limpieza Dentalcon Ultrasonido y Pulido Dental",
+        duracion: "1 Hora",
+        costo: " $400"
     },
     blanqueamiento: {
         titulo: "Blanqueamiento Dental",
-        descripcion: "Tratamiento para aclarar el color de tus dientes de forma segura y efectiva, mejorando tu sonrisa.",
-        duracion: "2 horas",
-        costo: "$300"
+        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Limpieza Dental conUltrasonido, Pulido Dental y Blanqueamient",
+        duracion: " 1 hora y media a 2 horas",
+        costo: " $1650"
     },
     ortodoncia: {
-        titulo: "Ortodoncia",
-        descripcion: "Corrección de la posición de los dientes y la mordida mediante brackets tradicionales o transparentes.",
-        duracion: "1 año",
-        costo: "$5000"
+        titulo: "Extracción Dental",
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Extracción Dental.(No Muelas del Juicio) ",
+        duracion: " 30min a 1 hora",
+        costo: " $500 Simple por Diente , $800 Compleja por Diente"
     },
     endodoncia: {
-        titulo: "Endodoncia",
-        descripcion: "Tratamiento de conductos para salvar dientes con daño severo o infección en el nervio dental.",
+        titulo: "Desmanchado Dental por Fluorosis",
+        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Eliminaciónmanchas por Fluorosis",
         duracion: "1 hora",
-        costo: "$400"
-    }
+        costo: " $350 Por Diente"
+    },
+    
+        MásServicios: {
+            titulo: [
+                "Prótesis Fija",
+                "Prótesis Removible",
+                "Prótesis Total",
+                "Incrustaciones",
+                "Tratamiento de Encías",
+                "Guardas Oclusales",
+                "Extracción Muela del juicio Sencilla",
+                "Extracción Muelas del juicio Compleja (Especialista)",
+                "Aplicación de selladores (Niños)",
+                "Aplicación de Flúor (Niños)",
+                "Pulpotomías (Especialista)",
+                "Pulpectomias (Especialista)",
+                "Endodoncia (Especialista)"
+            ],
+            descripcion: `Dichos servicios no son realizados en el consultorio para más informacion consultar al medico dentista`,
+            duracion: "NA",
+            costo: "NA"
+        }
+    
 };
 
 // Seleccionar elementos del DOM

@@ -35,13 +35,26 @@
     <Content Include=".gitignore" />
     <Content Include="render.yaml" />
     <Content Include="requirements.txt" />
+    <Content Include="static\css\promociones.css" />
     <Content Include="static\css\styles.css" />
     <Content Include="static\img\caries.png" />
     <Content Include="static\img\diente.png" />
+    <Content Include="static\img\imagen1.jpeg" />
+    <Content Include="static\img\imagen10.jpeg" />
+    <Content Include="static\img\imagen2.jpeg" />
+    <Content Include="static\img\imagen3.jpeg" />
+    <Content Include="static\img\imagen4.jpeg" />
+    <Content Include="static\img\imagen5.jpeg" />
+    <Content Include="static\img\imagen6.jpeg" />
+    <Content Include="static\img\imagen7.jpeg" />
+    <Content Include="static\img\imagen8.jpeg" />
+    <Content Include="static\img\imagen9.jpeg" />
     <Content Include="static\js\game.js" />
+    <Content Include="static\js\promociones.js" />
     <Content Include="static\js\services.js" />
     <Content Include="templates\index.html" />
     <Content Include="templates\juego.html" />
+    <Content Include="templates\promociones.html" />
     <Content Include="templates\servicios.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

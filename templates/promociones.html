@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Promociones</title>
+    <!-- Enlazar el archivo CSS personalizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/promociones.css') }}">
+    <!-- Enlazar el CSS de Swiper.js -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+    <!-- Contenedor de Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {% for i in range(1, 5) %} <!-- Ajusta el rango según el número de imágenes -->
+            <div class="swiper-slide">
+                <img src="{{ url_for('static', filename='img/imagen' ~ i ~ '.jpeg') }}" alt="Imagen {{ i }}">
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Paginación (si es necesaria) -->
+        <div class="swiper-pagination"></div>
+        <!-- Botones de navegación (si son necesarios) -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+    <!-- Enlazar el JavaScript de Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Enlazar el archivo JavaScript personalizado -->
+    <script src="{{ url_for('static', filename='js/promociones.js') }}"></script>
+</body>
+</html>
