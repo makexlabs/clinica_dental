@@ -13,7 +13,7 @@
     <!-- Contenedor de Swiper -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            {% for i in range(1, 5) %} <!-- Ajusta el rango según el número de imágenes -->
+            {% for i in range(1, 11) %} <!-- Ajusta el rango según el número de imágenes -->
             <div class="swiper-slide">
                 <img src="{{ url_for('static', filename='img/imagen' ~ i ~ '.jpeg') }}" alt="Imagen {{ i }}">
             </div>
