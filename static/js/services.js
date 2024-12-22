@@ -2,62 +2,60 @@
 const serviciosData = {
     consulta: {
         titulo: "Consulta Dental",
-        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento y Presupuesto.",
-        duracion: " 30min a 1h",
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento y Presupuesto.",
+        duracion: "30min a 1h",
         costo: "$300"
     },
     resinas: {
         titulo: "Resinas Dentales",
-        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Eliminación deCaries y Obturación con Resina",
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Eliminación de Caries y Obturación con Resina",
         duracion: "1 hora",
         costo: "$500 por Diente"
     },
     limpieza: {
         titulo: "Limpieza Dental Profesional",
-        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Limpieza Dentalcon Ultrasonido y Pulido Dental",
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Limpieza Dental con Ultrasonido y Pulido Dental",
         duracion: "1 Hora",
-        costo: " $400"
+        costo: "$400"
     },
     blanqueamiento: {
         titulo: "Blanqueamiento Dental",
-        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Limpieza Dental conUltrasonido, Pulido Dental y Blanqueamient",
-        duracion: " 1 hora y media a 2 horas",
-        costo: " $1650"
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento, Presupuesto, Limpieza Dental con Ultrasonido, Pulido Dental y Blanqueamiento",
+        duracion: "1 hora y media a 2 horas",
+        costo: "$1650"
     },
     ortodoncia: {
         titulo: "Extracción Dental",
-        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Extracción Dental.(No Muelas del Juicio) ",
-        duracion: " 30min a 1 hora",
-        costo: " $500 Simple por Diente , $800 Compleja por Diente"
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Extracción Dental. (No Muelas del Juicio)",
+        duracion: "30min a 1 hora",
+        costo: "$500 Simple por Diente, $800 Compleja por Diente"
     },
     endodoncia: {
         titulo: "Desmanchado Dental por Fluorosis",
-        descripcion: " Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografíaperiapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Eliminaciónmanchas por Fluorosis",
+        descripcion: "Se realiza Valoración y Diagnóstico completo, revisión con cámara intraoral, Radiografía periapical en caso de ser necesario, Plan de tratamiento, Presupuesto y Eliminación de manchas por Fluorosis",
         duracion: "1 hora",
-        costo: " $350 Por Diente"
+        costo: "$350 Por Diente"
     },
-    
-        MásServicios: {
-            titulo: [
-                "Prótesis Fija",
-                "Prótesis Removible",
-                "Prótesis Total",
-                "Incrustaciones",
-                "Tratamiento de Encías",
-                "Guardas Oclusales",
-                "Extracción Muela del juicio Sencilla",
-                "Extracción Muelas del juicio Compleja (Especialista)",
-                "Aplicación de selladores (Niños)",
-                "Aplicación de Flúor (Niños)",
-                "Pulpotomías (Especialista)",
-                "Pulpectomias (Especialista)",
-                "Endodoncia (Especialista)"
-            ],
-            descripcion: `Dichos servicios no son realizados en el consultorio para más informacion consultar al medico dentista`,
-            duracion: "NA",
-            costo: "NA"
-        }
-    
+    MásServicios: {
+        titulo: [
+            "Prótesis Fija",
+            "Prótesis Removible",
+            "Prótesis Total",
+            "Incrustaciones",
+            "Tratamiento de Encías",
+            "Guardas Oclusales",
+            "Extracción Muela del juicio Sencilla",
+            "Extra Muela Juicio Compleja (Especialista)",
+            "Aplicación de selladores (Niños)",
+            "Aplicación de Flúor (Niños)",
+            "Pulpotomías (Especialista)",
+            "Pulpectomias (Especialista)",
+            "Endodoncia (Especialista)"
+        ],
+        descripcion: `Algunos de los tratamientos son realizados por el especialista, por lo que se le refiere a otro consultorio o clínica. Para más información preguntar directamente al personal de la clínica`,
+        duracion: "NA",
+        costo: "NA"
+    }
 };
 
 // Seleccionar elementos del DOM
@@ -73,11 +71,16 @@ const serviceBtns = document.querySelectorAll('.service-btn');
 function openModal(serviceId) {
     const service = serviciosData[serviceId];
     if (service) {
-        modalTitle.textContent = service.titulo;
+        if (Array.isArray(service.titulo)) {
+            modalTitle.innerHTML = service.titulo.map(item => `<li>${item}</li>`).join(''); // Convertir a lista
+        } else {
+            modalTitle.textContent = service.titulo;
+        }
         modalDescription.textContent = service.descripcion;
         modalDuration.textContent = `Duración: ${service.duracion}`;
         modalCost.textContent = `Costo Aproximado: ${service.costo}`;
         modal.style.display = 'block';
+
         // Pequeño delay para asegurar que la transición funcione
         setTimeout(() => {
             modal.classList.add('active');
