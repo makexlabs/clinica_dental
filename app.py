@@ -18,9 +18,8 @@ app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 # Protección CSRF
 csrf = CSRFProtect(app)
 
-# Configurar Talisman (desactivado en desarrollo, flexible en producción)
-if os.getenv('FLASK_ENV', 'development') == 'production':
-   csp = {
+# Define CSP for all environments
+csp = {
     'default-src': "'self'",
     'script-src': [
         "'self'",
@@ -43,10 +42,9 @@ if os.getenv('FLASK_ENV', 'development') == 'production':
     'connect-src': "'self'"
 }
 
-if not app.debug:
-    Talisman(app, 
-             content_security_policy=csp,
-             content_security_policy_nonce_in=None)  # Remove nonce requirement
+# Configure Talisman based on environment
+if os.getenv('FLASK_ENV', 'development') == 'production':
+    Talisman(app, content_security_policy=csp, content_security_policy_nonce_in=None)
 else:
     Talisman(app, content_security_policy=None)
 
