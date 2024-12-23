@@ -20,16 +20,34 @@ csrf = CSRFProtect(app)
 
 # Configurar Talisman (desactivado en desarrollo, flexible en producción)
 if os.getenv('FLASK_ENV', 'development') == 'production':
-    csp = {
-        'default-src': "'self'",
-        'img-src': "'self' data:",
-        'script-src': "'self' https://unpkg.com",
-        'style-src': "'self' 'unsafe-inline' https://unpkg.com",
-        'font-src': "'self' data:",  # Permitir fuentes embebidas
-    }
-    Talisman(app, content_security_policy=csp)
+   csp = {
+    'default-src': "'self'",
+    'script-src': [
+        "'self'",
+        "'unsafe-inline'",
+        "'unsafe-eval'",
+        "https://cdn.jsdelivr.net",
+        "http://me.kis.v2.scr.kaspersky-labs.com",
+        "ws://me.kis.v2.scr.kaspersky-labs.com"
+    ],
+    'style-src': [
+        "'self'",
+        "'unsafe-inline'",
+        "https://unpkg.com",
+        "https://cdn.jsdelivr.net",
+        "http://me.kis.v2.scr.kaspersky-labs.com",
+        "ws://me.kis.v2.scr.kaspersky-labs.com"
+    ],
+    'img-src': "'self' data:",
+    'font-src': "'self' data: https://cdn.jsdelivr.net",
+    'connect-src': "'self'"
+}
+
+if not app.debug:
+    Talisman(app, 
+             content_security_policy=csp,
+             content_security_policy_nonce_in=None)  # Remove nonce requirement
 else:
-    # En desarrollo, desactivar CSP para evitar bloqueos innecesarios
     Talisman(app, content_security_policy=None)
 
 # Rutas
@@ -49,6 +67,9 @@ def juego():
 def promociones():
     return render_template('promociones.html')
 
+@app.route('/citas')
+def citas():
+    return render_template('citas.html')
 # Ejecutar la aplicación
 if __name__ == '__main__':
     # Ejecuta en modo de desarrollo local
