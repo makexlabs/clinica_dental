@@ -62,17 +62,17 @@
                                 <label for="horario_preferido" class="form-label">Horario Disponible</label>
                                 <select class="form-select" id="horario_preferido" required>
                                     <option value="">Seleccione un horario</option>
-                                    <option value="09:00">09:00</option>
                                     <option value="10:00">10:00</option>
                                     <option value="11:00">11:00</option>
                                     <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
                                     <option value="16:00">16:00</option>
                                     <option value="17:00">17:00</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="19:00">19:00</option>
                                 </select>
                             </div>
-                            <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg">Solicitar Cita</button>
-                            </div>
+                            
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-primary btn-lg" id="enviarCita">Enviar Cita</button>
                             </div>
@@ -86,10 +86,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const phoneNumber = '524493909262'; // Replace with doctor's phone number
-        
-        document.getElementById('enviarCita').addEventListener('click', function(e) {
+
+        document.getElementById('enviarCita').addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             // Collect form data
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
@@ -101,34 +101,30 @@
             const motivoConsulta = document.getElementById('motivo_consulta').value;
             const fechaPreferida = document.getElementById('fecha_preferida').value;
             const horarioPreferido = document.getElementById('horario_preferido').value;
-        
+
             // Format message
             const message = `
-                *Nueva Solicitud de Cita Dental*
-                -------------------
-                *Nombre:* ${nombre}
-                *Email:* ${email}
-                *Teléfono:* ${telefono}
-                *Fecha Nacimiento:* ${fechaNacimiento}
-                
-                *Información Médica:*
-                Condiciones: ${condicionesMedicas}
-                Alergias: ${alergias}
-                Medicamentos: ${medicamentos}
-                
-                *Detalles Cita:*
-                Motivo: ${motivoConsulta}
-                Fecha preferida: ${fechaPreferida}
-                Horario: ${horarioPreferido}
-            `.replace(/\n/g, '%0A');
-        
+                    *Nueva Solicitud de Cita Dental*
+                    -------------------
+                    *Nombre:* ${nombre}
+                    *Email:* ${email}
+                    *Teléfono:* ${telefono}
+                    *Fecha Nacimiento:* ${fechaNacimiento}
+
+                    *Información Médica:*
+                    Condiciones: ${condicionesMedicas}
+                    Alergias: ${alergias}
+                    Medicamentos: ${medicamentos}
+
+                    *Detalles Cita:*
+                    Motivo: ${motivoConsulta}
+                    Fecha preferida: ${fechaPreferida}
+                    Horario: ${horarioPreferido}
+                `.replace(/\n/g, '%0A');
+
             // Create WhatsApp link
             const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
-            
 
-
-            
-            
             // Validate form
             const form = document.querySelector('form');
             if (form.checkValidity()) {
@@ -140,60 +136,70 @@
         });
 
         // Store taken appointments
-const takenAppointments = JSON.parse(localStorage.getItem('appointments')) || {};
+        const takenAppointments = JSON.parse(localStorage.getItem('appointments')) || {};
 
-// Function to check if slot is available
-function isSlotAvailable(date, time) {
-    const key = `${date}-${time}`;
-    return !takenAppointments[key];
-}
-
-// Function to mark slot as taken
-function markSlotAsTaken(date, time) {
-    const key = `${date}-${time}`;
-    takenAppointments[key] = true;
-    localStorage.setItem('appointments', JSON.stringify(takenAppointments));
-}
-
-// Update available times when date changes
-document.getElementById('fecha_preferida').addEventListener('change', function(e) {
-    const selectedDate = e.target.value;
-    const timeSelect = document.getElementById('horario_preferido');
-    const options = timeSelect.options;
-
-    for (let i = 1; i < options.length; i++) {
-        const time = options[i].value;
-        if (!isSlotAvailable(selectedDate, time)) {
-            options[i].disabled = true;
-            options[i].text = options[i].value + ' (No disponible)';
-        } else {
-            options[i].disabled = false;
-            options[i].text = options[i].value;
+        // Function to check if slot is available
+        function isSlotAvailable(date, time) {
+            const key = `${date}-${time}`;
+            return !takenAppointments[key];
         }
-    }
-});
 
-// Update form submit handler
-document.getElementById('enviarCita').addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    const fecha = document.getElementById('fecha_preferida').value;
-    const horario = document.getElementById('horario_preferido').value;
+        // Function to mark slot as taken
+        function markSlotAsTaken(date, time) {
+            const key = `${date}-${time}`;
+            takenAppointments[key] = true;
+            localStorage.setItem('appointments', JSON.stringify(takenAppointments));
+        }
 
-    if (!isSlotAvailable(fecha, horario)) {
-        alert('Lo sentimos, este horario ya no está disponible. Por favor seleccione otro.');
-        return;
-    }
+        // Update available times when date changes
+        document.getElementById('fecha_preferida').addEventListener('change', function (e) {
+            const selectedDate = e.target.value;
+            const timeSelect = document.getElementById('horario_preferido');
+            const options = timeSelect.options;
 
-    // Existing form validation and WhatsApp message code here
-    // ...existing code...
+            // Check if the selected date is a Saturday
+            const date = new Date(selectedDate);
+            const isSaturday = date.getDay() === 5; // 6 corresponds to Saturday
 
-    // If message sent successfully, mark slot as taken
-    markSlotAsTaken(fecha, horario);
-});
+            // Clear existing options
+            timeSelect.innerHTML = '<option value="">Seleccione un horario</option>';
 
+            // Define available times based on the day
+            const availableTimes = isSaturday
+                ? ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00']
+                : ['10:00', '11:00', '12:00', '13:00', '16:00', '17:00', '18:00', '19:00'];
 
-        </script>
-        
+            // Populate the select element with available times
+            availableTimes.forEach(time => {
+                const option = document.createElement('option');
+                option.value = time;
+                option.text = time;
+                if (!isSlotAvailable(selectedDate, time)) {
+                    option.disabled = true;
+                    option.text += ' (No disponible)';
+                }
+                timeSelect.appendChild(option);
+            });
+        });
+
+        // Update form submit handler
+        document.getElementById('enviarCita').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const fecha = document.getElementById('fecha_preferida').value;
+            const horario = document.getElementById('horario_preferido').value;
+
+            if (!isSlotAvailable(fecha, horario)) {
+                alert('Lo sentimos, este horario ya no está disponible. Por favor seleccione otro.');
+                return;
+            }
+
+            // Existing form validation and WhatsApp message code here
+            // ...existing code...
+
+            // If message sent successfully, mark slot as taken
+            markSlotAsTaken(fecha, horario);
+        });
+    </script>
 </body>
 </html>
