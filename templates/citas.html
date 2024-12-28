@@ -44,7 +44,7 @@
                                 <textarea class="form-control" id="alergias" rows="2"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="medicamentos" class="form-label">Medicamentos Actuales</label>
+                                <label for="medicamentos" class="form-label">Medicación actual</label>
                                 <textarea class="form-control" id="medicamentos" rows="2"></textarea>
                             </div>
 
@@ -86,6 +86,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const phoneNumber = '524495806092'; // Replace with doctor's phone number
+
+
+        // Validar que no se seleccione un domingo
+        document.getElementById('fecha_preferida').addEventListener('change', function (e) {
+            const selectedDate = e.target.value;
+            const date = new Date(selectedDate);
+            const isSunday = date.getDay() === 6; // 0 corresponde a domingo
+
+            if (isSunday) {
+                alert("Lo sentimos, no se pueden agendar citas los domingos.");
+                e.target.value = ""; // Limpia el campo de fecha
+            }
+        });
+
 
         document.getElementById('enviarCita').addEventListener('click', function (e) {
             e.preventDefault();
